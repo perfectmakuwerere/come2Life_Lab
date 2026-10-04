@@ -1,54 +1,51 @@
-# GenRec prototype
+# ✳ Come to Life
 
-Small-scale reproduction of **GenRec: An LLM-Backed Recommendation Ranker at Netflix**
-(Li et al., arXiv [2608.10257](https://arxiv.org/abs/2608.10257)).
+> **Research, made real.**
+> An independent research studio that turns breakthrough papers into real, working prototypes.
 
-Netflix released no code or data, so this reproduces the Phase-2 recipe on a public
-dataset (MovieLens-1M) with a small open LLM backbone.
+🔗 **Live site:** https://cometolife.netlify.app
 
-## What is being reproduced
+---
 
-| Paper component | Module |
-|---|---|
-| Verbalizer `x = V(H, {M_i}, tau)` with event selection and compaction | `src/genrec/verbalize/` |
-| Pooled hidden state `h` plus catalog-aware scoring head with item embeddings `e_i` | `src/genrec/model/` |
-| Loss `L = a*L_rank + b*L_lm + g*L_misc` (a+b+g = 1) | `src/genrec/training/losses.py` |
-| Reward-weighted ranking loss | `src/genrec/training/rewards.py` |
-| Prefill-only full-catalog scoring | `src/genrec/serving/prefill_score.py` |
-| MRR, Recall@K, NDCG@K | `src/genrec/eval/metrics.py` |
+## What this lab is about
 
-Not reproduced: Phase 1 (Netflix-specific foundation LLM), Netflix reward models, online A/B testing.
+Come to Life picks the research papers that make us stop scrolling, then builds the thing they imagined. The premise is simple: ideas deserve more than a PDF. Research isn't the destination, it's a doorway, and this lab exists to open it, step through, and invite others along.
 
-## Layout
+**Less talking. More making.**
 
-```
-genrec/
-  configs/        YAML configs (data, model, loss weights, training)
-  data/raw|processed   datasets (git-ignored)
-  scripts/        entry points: prepare_data, train, evaluate, ablate_context
-  src/genrec/
-    data/         loading, temporal splits, conversation-style examples
-    verbalize/    prompt construction and context compaction
-    model/        backbone wrapper, scoring head
-    training/     losses, reward weights, trainer
-    eval/         ranking metrics
-    serving/      prefill-only scoring
-  tests/
-  results/        tables and plots
-  notebooks/      exploration
-```
+## Our method
 
-## Status
+Every project moves through three states:
 
-Skeleton only. Every module has a docstring and `NotImplementedError` stubs describing what to build.
+| Step | Name | What happens |
+|------|------|--------------|
+| 01 | **Find the spark** | We read widely and look for a question with a pulse. |
+| 02 | **Make it tangible** | We turn the research into something you can see, hear, or hold. |
+| 03 | **Share the process** | We document the messy, surprising, very human version of progress. |
 
-## Roadmap
+## Projects
 
-1. Baselines (popularity, SASRec) on a fixed temporal split
-2. Data pipeline and verbalizer v1, then compaction rules
-3. Model with scoring head; overfit a tiny batch
-4. Reward weighting from MovieLens proxy signals
-5. Ablations: context length, compaction, data scaling, backbone size, loss mix
-6. Prefill-only latency benchmark (HF forward, then vLLM)
-7. Write-up
-"# come2Life_Lab" 
+A growing archive of working prototypes (currently building **Genreq**).
+
+### 01 · Embodied AI: *A wearable that understands context*
+**Status:** Now in the lab (2025–2026)
+Prototyping *"Generative Agents: Interactive Simulacra of Human Behavior"* into a quiet second brain.
+
+### 02 · Spatial Audio: *Sound you can walk through*
+**Status:** Experimenting (2026)
+Turning neural audio fields into a place, not just a track.
+
+### 03 · Bio Interface: *Interfaces that grow with us*
+**Status:** On the horizon (coming soon)
+What happens when a material can learn, adapt, and gently respond?
+
+## Have a paper?
+
+Know a piece of research that should be out in the world? Send it our way and we'll give it a second life.
+
+📬 [hello@cometolife.studio](mailto:hello@cometolife.studio)
+
+
+---
+
+*come to life / 2026—∞. Made with attention.*
