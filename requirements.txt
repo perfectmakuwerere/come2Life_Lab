@@ -1,0 +1,11 @@
+torch>=2.3
+transformers>=4.44
+peft>=0.12
+datasets>=2.20
+pandas>=2.2
+numpy>=1.26
+pyyaml>=6.0
+tqdm>=4.66
+pytest>=8.0
+matplotlib>=3.8
+# optional, Linux/WSL2 only: vllm

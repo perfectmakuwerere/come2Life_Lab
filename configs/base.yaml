@@ -1,0 +1,42 @@
+data:
+  dataset: movielens-1m
+  raw_dir: data/raw
+  processed_dir: data/processed
+  split: leave_last_out_temporal   # last interaction per user -> test, second last -> val
+  min_interactions: 5
+  positive_rating_threshold: 4     # "high-quality engagement" proxy
+
+verbalization:
+  max_history_events: 50           # swept in the context-length ablation
+  keep_full_if_rating_gte: 4       # retain high-signal events with richer metadata
+  drop_if_rating_lte: 2            # omit low-signal events
+  compress_repeated_genre_runs: true
+  summarize_old_history: true
+  max_tokens: 1700                 # paper's compact budget (original about 5000)
+
+model:
+  backbone: Qwen/Qwen2.5-0.5B
+  pooling: last_token
+  item_embedding_dim: null         # null -> backbone hidden size
+  scoring: dot                     # dot | mlp
+  sampled_softmax_negatives: null  # null -> full softmax over catalog
+  lora:
+    enabled: true
+    r: 16
+    alpha: 32
+
+loss:
+  alpha_ranking: 0.8
+  beta_language: 0.2
+  gamma_misc: 0.0                  # alpha + beta + gamma must equal 1
+  reward_weighting: true
+
+train:
+  epochs: 3
+  batch_size: 8
+  lr: 2.0e-4
+  seed: 42
+  output_dir: results/run_000
+
+eval:
+  metrics: [mrr, recall@10, ndcg@10]
